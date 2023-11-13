@@ -1,22 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import turkey from '../../img/turkey.jpg'
 import france from '../../img/france.jpg'
 import usa from '../../img/usa.jpg'
 import uk from '../../img/uk.jpg'
+import { useNavigate } from 'react-router-dom';
 
 const Destinations = () => {
+    const navigate = useNavigate()
 
 
     const destination = [
 
         {
             img: turkey,
-            place: "Turkey",
+            place: "Turkiye",
             travelers: "14,000 travelers"
         },
         {
             img: france,
-            place: "France",
+            place: "Thailand",
             travelers: "25,000 travelers"
         },
         {
@@ -34,6 +36,7 @@ const Destinations = () => {
 
 
     ]
+   
 
     return (
         <div className='flex mt-8 mb-8'>
@@ -44,7 +47,12 @@ const Destinations = () => {
                         <h2 className="card-title">{data.place}</h2>
                         <p>{data.travelers}</p>
                         <div className="card-actions justify-end">
-                            <button className="btn btn-primary">Buy Now</button>
+                            <button className="btn btn-primary" onClick={
+                                () =>{ 
+                                    navigate(`/destination/${data.place}`)     
+                                }
+                              
+                                }>Booking</button>
                         </div>
                     </div>
                 </div>)

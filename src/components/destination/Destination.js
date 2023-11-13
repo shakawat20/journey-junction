@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { json, useLocation, useNavigate, useParams } from 'react-router-dom';
 import img3 from '../../img/turkiye-3.jpg'
 import img2 from '../../img/turkiye-2.jpg'
 import img1 from '../../img/turkiye-1.jpg'
@@ -15,6 +15,13 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const Destination = () => {
+
+    useEffect(() => {
+        window.scrollTo(0, 0); // Scroll to the top on component mount
+    }, []);
+
+
+
     let { id } = useParams();
     let location = useLocation();
     const notify = () => toast("Booked");
@@ -45,11 +52,20 @@ const Destination = () => {
 
     const handleRegister = (e) => {
         e.preventDefault();
-        notify()
-        console.log(formData); // This logs the form data
+        notify();
+        let storedData = JSON.parse(localStorage.getItem('user')) || []; // Retrieve and ensure it's an array
+    
+        if (!Array.isArray(storedData)) {
+            storedData = []; // Initialize as an array if it's not
+        }
+    
+        const updatedData = [...storedData, formData]; // Spread after ensuring it's an array
+        localStorage.setItem('user', JSON.stringify(updatedData));
+        
+        // This logs the form data
         // Here you can perform further actions, like sending the data to an API, state management, etc.
     };
-
+    
 
 
     const [showModal, setShowModal] = useState(false);
@@ -195,7 +211,7 @@ const Destination = () => {
 
     return (
         <div>
-    <ToastContainer />
+            <ToastContainer />
 
 
 
@@ -210,7 +226,7 @@ const Destination = () => {
                         <div className="max-w-md">
                             <h1 className="mb-5 text-white text-5xl font-bold">{countryInfo.countryName}</h1>
                             <p className="mb-5 text-gray">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-                            <button className="btn btn-primary">Get Started</button>
+
                         </div>
                     </div>
                 </div>
@@ -225,7 +241,7 @@ const Destination = () => {
                             <p>{y.description}</p>
                             <div className="card-actions justify-end">
                                 {user ? (
-                                    <label htmlFor="my_modal_6" onClick={()=>setHidden(false)} className="btn">Booking</label>
+                                    <label htmlFor="my_modal_6" onClick={() => setHidden(false)} className="btn">Booking</label>
                                 ) : (
                                     <label htmlFor="my_modal_6" className="btn" onClick={() => navigate('/login', { state: { from: location }, replace: true })}>Booking</label>
                                 )}
@@ -297,7 +313,7 @@ const Destination = () => {
 
 
                                     <input htmlFor="my_modal_6"
-                                        onClick={() => setHidden(true)}
+                                        onClick={() => {setHidden(true)   }}
                                         type="submit"
                                         value="Submit"
                                         className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300"

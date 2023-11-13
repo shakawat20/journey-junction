@@ -13,7 +13,8 @@ import Registration from './components/registration/Registration';
 
 function App() {
   return (
-    <div className="pl-9 pr-9 m-5">
+    <div className="pl-2 pr-2 m-2">
+      
       <Navbar></Navbar>
       <Routes>
         <Route path='/' element={<Home></Home>} />
@@ -22,9 +23,6 @@ function App() {
         <Route path='/login' element={<Login></Login>} />
         <Route path='/registration' element={<Registration></Registration>} />
       
-
-
-
       </Routes>
       <Footer></Footer>
   
