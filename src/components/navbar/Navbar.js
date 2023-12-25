@@ -11,6 +11,13 @@ const Navbar = () => {
         console.log(user.photoURL)
     }
 
+    const destinations = [
+        { label: 'Asia', links: [{country:"Turkiye",link:'/destination/Turkiye'}, {country:"Thailand",link:'/destination/Thailand'}] },
+        { label: 'Europe', links: [{country:"UK",link:'/destination/UK'}] },
+        { label: 'America', links: [{country:"USA",link:'/destination/USA'}] },
+      ];
+
+
     const navbar = <>
         <li className='mr-4 rounded-sm' >
             <Link to='/'>Home</Link>
@@ -20,8 +27,24 @@ const Navbar = () => {
             <details >
                 <summary>Destination</summary>
                 <ul className="p-2">
+                    {
+                       destinations.map((destination,index)=><div>
+                        <li className="dropdown dropdown-right">
+                          <li tabIndex={0} className=" m-1">{destination.label}</li>
+                          <ul tabIndex={0} className="dropdown-content z-[1]  p-2 shadow bg-base-100 rounded-box w-52">
+                            {
+                              destination.links.map(x=><li><Link to={x.link}>{x.country}</Link></li>)
+                            }
+                              
+                              {/* <li><Link to='/destination/Thailand'>Thailand</Link></li> */}
+                          </ul>
+                      </li>
+                      <br />
+                      </div>
+                       )   
+                    }
 
-                    <li className="dropdown dropdown-right">
+                    {/* <li className="dropdown dropdown-right">
                         <li tabIndex={0} className=" m-1">Asia</li>
                         <ul tabIndex={0} className="dropdown-content z-[1]  p-2 shadow bg-base-100 rounded-box w-52">
                             <li><Link to='/destination/Turkiye'>Turkiye</Link></li>
@@ -46,7 +69,7 @@ const Navbar = () => {
                             <li><Link to='/destination/USA'>USA</Link></li>
 
                         </ul>
-                    </li>
+                    </li> */}
 
 
                 </ul>
@@ -55,6 +78,9 @@ const Navbar = () => {
 
 
 
+        <li className='mr-4'>
+            <Link to='/dashboard'>My Dashboard</Link>
+        </li>
         <li className='mr-4'>
             <Link to='/about'>About</Link>
         </li>
