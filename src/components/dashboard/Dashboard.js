@@ -3,29 +3,8 @@ import { MyContext } from '../../App';
 import { Link, Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
-  const destination = useContext(MyContext)
-
-  useEffect(() => {
-    window.scrollTo(0, 0); // Scroll to the top on component mount
-}, []);
-  const x = JSON.parse(localStorage.getItem('user'))
-  console.log(x)
-  console.log(destination)
-  const var1 = []
 
 
-  for (let i = 0; i < x.length; i++) {
-    for (let j = 0; j < destination.length; j++) {
-      if (x[i] == null) {
-        continue
-      }
-      if (x[i].id == destination[j]._id) {
-        var1.push(destination[j].card[x[i].place.cardId])
-
-      }
-
-    }
-  }
 
 
   return (
@@ -48,21 +27,7 @@ const Dashboard = () => {
 
         </div>
       </div>
-      {/* {
-          var1.map(y =>
-            <div key={y.id} className="card card-compact bg-base-100 shadow-xl">
-              <figure>
-                <img src={y.img} alt="Shoes" className='rounded' style={{ height: "250px", width: "350px" }} />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title">{y.title}</h2>
-                <p>{y.description}</p>
-                <p>{y.price} $</p>
-                <button className='btn'>Pay</button>
-              </div>
-            </div>
-          )
-        } */}
+   
     </div>
   );
 };

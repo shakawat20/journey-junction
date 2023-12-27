@@ -6,7 +6,7 @@ import { loadStripe } from '@stripe/stripe-js';
 // import './CheckoutForm.css';
 
 const MyDestination = () => {
-  const destinationContext = useContext(MyContext);
+  const destination = useContext(MyContext);
   const stripePromise = loadStripe("pk_test_51ND8OoBH3R7X5Kq3nuY3sbq3MnyL7O4ZppvMpZoCANMGXYzyMjVDoJfoVZDSvFuk5L3E5OPi5L46x21vuzwDsxV0005AAEeWGa"); // Replace with your actual Stripe public key
 
   const [price, setPrice] = useState(null);
@@ -36,7 +36,7 @@ const MyDestination = () => {
       body: JSON.stringify({ price: price }),
     })
       .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret));
+      .then((data) => setClientSecret(data?.clientSecret));
   };
 
   const removePlace = (placeId) => {
@@ -51,18 +51,31 @@ const MyDestination = () => {
     setPrice('');
   };
 
-  user.forEach((xItem) => {
-    destinationContext.forEach((destItem) => {
-      if (xItem && xItem.id === destItem._id) {
-        places.push({
-          destination: destItem.card[xItem.place.cardId],
-          id: xItem.place.cardId,
-          destinationId: destItem._id,
-          uniqueId: xItem.uniqueId
-        });
+ 
+  const x = JSON.parse(localStorage.getItem('user'))
+
+  for (let i = 0; i < x.length; i++) {
+    for (let j = 0; j < destination.length; j++) {
+      if (x[i] == null) {
+        continue
       }
-    });
-  });
+      if (x[i].id == destination[j]._id) {
+
+        places.push(
+          {
+            destination: destination[j].card[x[i].place.cardId],
+            id: x[i].place.cardId,
+            destinationId: destination[j]._id,
+            uniqueId: x[i].uniqueId
+          }
+        )
+
+
+      }
+
+    }
+  }
+
 
   return (
     <div style={{ height: "900px" }}>

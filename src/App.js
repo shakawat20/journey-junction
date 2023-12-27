@@ -14,6 +14,8 @@ import React, { createContext, useEffect, useState } from 'react';
 import Dashboard from './components/dashboard/Dashboard'
 import MyDestination from './components/dashboard/myDestination/MyDestination'
 import PaymentInfo from './components/payment/PaymentInfo';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from './firebase/firebase.init';
 
 
 
@@ -21,6 +23,7 @@ export const MyContext = createContext();
 function App() {
 
   const [destination, setDestination] = useState([]);
+  const [user]=useAuthState(auth)
 
   useEffect(() => {
     fetch('https://journey-junction-server.vercel.app/destination')
@@ -43,11 +46,11 @@ function App() {
           {/* <Route path='/dashboard' element={<Dashboard><Dashboard/>}>
             <Route path='/dashboard/myDestination' element={ <MyDestination></MyDestination>} />
           </Route> */}
-          <Route path='/dashboard' element={<Dashboard></Dashboard>}>
+         {user?.email && <Route path='/dashboard' element={<Dashboard></Dashboard>}>
             <Route path='/dashboard' element={<MyDestination></MyDestination>} />
             <Route path='/dashboard/paymentInfo' element={<PaymentInfo></PaymentInfo>} />
 
-          </Route>
+          </Route>}
 
         </Routes>
         <Footer></Footer>

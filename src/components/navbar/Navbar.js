@@ -11,6 +11,7 @@ const Navbar = () => {
         console.log(user.photoURL)
     }
 
+
     const destinations = [
         { label: 'Asia', links: [{country:"Turkiye",link:'/destination/Turkiye'}, {country:"Thailand",link:'/destination/Thailand'}] },
         { label: 'Europe', links: [{country:"UK",link:'/destination/UK'}] },
@@ -78,9 +79,9 @@ const Navbar = () => {
 
 
 
-        <li className='mr-4'>
-            <Link to='/dashboard'>My Dashboard</Link>
-        </li>
+      { user?.email && <li className='mr-4'>
+            <Link to='/dashboard'>My destination</Link>
+        </li>}
         <li className='mr-4'>
             <Link to='/about'>About</Link>
         </li>

@@ -10,7 +10,15 @@ const PaymentInfo = () => {
 
         if (user?.email) {
 
-            fetch(`http://localhost:9000/paymentInfo/${user?.email}`)
+            fetch(`https://journey-junction-server.vercel.app/paymentInfo/${user?.email}`,
+            {
+                method: 'GET',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('journeyToken')}`
+                }
+            }
+            
+            )
                 .then(res => res.json())
                 .then(data => {
                     setPayment(data)
@@ -18,7 +26,7 @@ const PaymentInfo = () => {
                 })
         }
 
-    }, [user?.email])
+    }, [user])
 
     console.log(payment)
     return (

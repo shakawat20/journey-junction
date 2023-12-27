@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useSignInWithGoogle, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSignInWithGoogle, useSignInWithEmailAndPassword, useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase/firebase.init';
 
 const Login = () => {
@@ -13,28 +13,59 @@ const Login = () => {
   console.log(location)
   let from = location?.state?.from?.pathname || "/";
   console.log(from)
+  const [aUser] = useAuthState(auth)
 
   const handleLogin = (e) => {
     e.preventDefault();
 
     console.log('Email:', email);
     console.log('Password:', password);
-    localStorage.setItem('user', gUser?.email)
+    // localStorage.setItem('user', gUser?.email)
+
+
+
 
   };
+
+console.log(aUser?.email)
+  if (aUser?.email) {
+    fetch('http://localhost:9000/jwt', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({ email:email })
+
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log("token", data.token)
+
+        localStorage.setItem('journeyToken', data.token)
+
+
+      })
+  }
+
+
+
+
+
+
+
   if (gUser || user) {
     navigate(from)
   }
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to the top on component mount
-}, []);
+  }, []);
 
   return (
     <div
       style={{
         backgroundImage: `url(https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?q=80w=1887auto=formatfit=cropixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)`,
         backgroundSize: 'cover',
-       
+
       }}>
       <div className="min-h-screen flex items-center justify-center  ">
 
