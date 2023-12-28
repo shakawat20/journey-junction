@@ -15,7 +15,7 @@ const Destination = () => {
     const [cardId, setCardId] = useState();
     const [combine, setCombine] = useState();
     const bookingId = uuidv4();
-
+    const [showModal, setShowModal] = useState(false);
 
     let { id } = useParams();
     let location = useLocation();
@@ -24,7 +24,7 @@ const Destination = () => {
     const navigate = useNavigate();
     // const [destination, setDestination] = useState([]);
     const countryInfo = destination.find(x => x.countryName === id);
-    const notify = () => toast("Booked");
+    const notify = () => toast("Add to my destination");
 
 
 
@@ -53,7 +53,7 @@ const Destination = () => {
     };
     const handleRegister = (e) => {
         e.preventDefault();
-        notify();
+        
 
         const newCombine = {
             uniqueId: bookingId,
@@ -69,6 +69,8 @@ const Destination = () => {
 
         localStorage.setItem('user', JSON.stringify([...storedData, newCombine]));
 
+        notify();
+
         setFormData({
             name: user?.displayName,
             email: user?.email,
@@ -79,8 +81,7 @@ const Destination = () => {
     };
 
     // console.log(countryInfo?.card[0])
-    const [showModal, setShowModal] = useState(false);
-
+  
     const openModal = () => {
         setShowModal(true);
     };

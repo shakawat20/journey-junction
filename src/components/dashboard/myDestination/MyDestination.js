@@ -20,6 +20,10 @@ const MyDestination = () => {
   const places = [];
 
   useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top on component mount
+  }, []);
+  
+  useEffect(() => {
     if (price) {
       fetchPaymentIntent();
     }
@@ -51,7 +55,7 @@ const MyDestination = () => {
     setPrice('');
   };
 
- 
+
   const x = JSON.parse(localStorage.getItem('user'))
 
   for (let i = 0; i < x.length; i++) {

@@ -55,28 +55,31 @@ const About = () => {
                     <div className="hero-content text-center text-neutral-content">
                         <div className="max-w-md">
                             <h1 className="mb-5 text-white text-5xl font-bold">About Us</h1>
-                            <p className="mb-5 text-gray" style={{fontFamily: "Times New Roman"}}>Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+                            <p className="mb-5 text-gray" style={{ fontFamily: "Times New Roman" }}>Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
 
                         </div>
                     </div>
                 </div>
             </div>
- <p className='font-bold text-3xl mt-5'>  Why you choose us?</p>
-            <div className='grid grid-cols-3'>
-               
-          
-              
-                {aboutServices.map((service, index) => (
-                    <div className="card w-96 bg-base-100 shadow-xl m-3 border" key={index}>
-                        <figure></figure>
-                        <div className="card-body">
-                            <h2 className="card-title">{service.title}</h2>
-                            <p>{service.p}</p>
+            <div className='flex flex-col justify-between" items-center'>
+                <p className='font-bold text-3xl mt-5 text-center'>  Why you choose us?</p>
+                <div className='grid grid-cols-3 '>
 
+
+
+                    {aboutServices.map((service, index) => (
+                        <div className="card w-96 bg-base-100 shadow-xl m-6 border" key={index}>
+                            <figure></figure>
+                            <div className="card-body">
+                                <h2 className="card-title">{service.title}</h2>
+                                <p>{service.p}</p>
+
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
+
 
 
             <div className='flex mt-10'>

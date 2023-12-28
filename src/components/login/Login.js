@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSignInWithGoogle, useSignInWithEmailAndPassword, useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase/firebase.init';
+import Loading from '../loading/Loading';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -15,6 +16,10 @@ const Login = () => {
   console.log(from)
   const [aUser] = useAuthState(auth)
 
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top on component mount
+  }, []);
+
   const handleLogin = (e) => {
     e.preventDefault();
 
@@ -27,9 +32,14 @@ const Login = () => {
 
   };
 
-console.log(aUser?.email)
+
+  if(!aUser){
+    <Loading></Loading>
+  }
+  
+
   if (aUser?.email) {
-    fetch('http://localhost:9000/jwt', {
+    fetch('https://journey-junction-server.vercel.app/jwt', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -52,13 +62,10 @@ console.log(aUser?.email)
 
 
 
-
   if (gUser || user) {
     navigate(from)
   }
-  useEffect(() => {
-    window.scrollTo(0, 0); // Scroll to the top on component mount
-  }, []);
+
 
   return (
     <div

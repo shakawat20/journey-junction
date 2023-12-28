@@ -7,10 +7,10 @@ import {
 } from "@stripe/react-stripe-js";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase/firebase.init";
-import { ToastContainer, toast } from 'react-toastify';
+
 
 const CheckoutForm=({clientSecret,price,transaction,setTransaction,success,setSuccess})=>{
-    const paymentConfirmation = () => toast("payment done");
+    
     // const [transaction, setTransaction] = useState('')
     // const [success, setSuccess] = useState('')
     const stripe = useStripe();
@@ -94,7 +94,7 @@ const CheckoutForm=({clientSecret,price,transaction,setTransaction,success,setSu
             })
                 .then(res => res.json())
                 .then(data => {
-                    paymentConfirmation()
+                    console.log(data)
                 })
 
 

@@ -23,7 +23,7 @@ export const MyContext = createContext();
 function App() {
 
   const [destination, setDestination] = useState([]);
-  const [user]=useAuthState(auth)
+  const [user] = useAuthState(auth)
 
   useEffect(() => {
     fetch('https://journey-junction-server.vercel.app/destination')
@@ -43,10 +43,8 @@ function App() {
           <Route path='/about' element={<About></About>} />
           <Route path='/login' element={<Login></Login>} />
           <Route path='/registration' element={<Registration></Registration>} />
-          {/* <Route path='/dashboard' element={<Dashboard><Dashboard/>}>
-            <Route path='/dashboard/myDestination' element={ <MyDestination></MyDestination>} />
-          </Route> */}
-         {user?.email && <Route path='/dashboard' element={<Dashboard></Dashboard>}>
+          {user?.email && <Route path='/dashboard' element={<Dashboard></Dashboard>}>
+            
             <Route path='/dashboard' element={<MyDestination></MyDestination>} />
             <Route path='/dashboard/paymentInfo' element={<PaymentInfo></PaymentInfo>} />
 
