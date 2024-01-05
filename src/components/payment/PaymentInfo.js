@@ -6,13 +6,13 @@ import Loading from '../loading/Loading';
 const PaymentInfo = () => {
     const [user] = useAuthState(auth)
     const [payment, setPayment] = useState([])
-    const [removeDestination,setRemoveDestination]=useState()
+    const [removeDestination, setRemoveDestination] = useState()
 
 
     useEffect(() => {
         if (!user?.email) {
             setPayment([])
-            return(<span className="loading loading-spinner loading-lg"></span>)
+            return (<span className="loading loading-spinner loading-lg"></span>)
         }
         else if (user?.email) {
 
@@ -28,32 +28,33 @@ const PaymentInfo = () => {
                 .then(res => res.json())
                 .then(data => {
                     setPayment(data)
-                    console.log("paymentInfo",data)
+                    console.log("paymentInfo", data)
                 })
         }
 
-    }, [user,removeDestination])
+    }, [user, removeDestination])
 
-    const remove =(transactionId)=>{
-        fetch(`https://journey-junction-server.vercel.app/paymentInfo/${transactionId}`,{
-            method:"DELETE",
+    const remove = (transactionId) => {
+        fetch(`https://journey-junction-server.vercel.app/paymentInfo/${transactionId}`, {
+            method: "DELETE",
             headers: {
                 'content-type': 'application/json'
             },
         })
-        .then(res=>res.json())
-        .then(data=>{
-            console.log("remove",data)
-            setRemoveDestination(data)
-        })
+            .then(res => res.json())
+            .then(data => {
+                console.log("remove", data)
+                setRemoveDestination(data)
+            })
 
     }
-if(!payment){
-
-    return(<Loading></Loading>)
-
-}
     console.log(payment)
+    if (payment.message) {
+
+       return(<div>Session expire</div>)
+
+    }
+    console.log("payment message",  payment.message)
     return (
         <div>
 
@@ -78,7 +79,7 @@ if(!payment){
                                     <td>{PaymentInfo?.email}</td>
                                     <td>{PaymentInfo?.transaction}</td>
                                     <td>{PaymentInfo?.price}</td>
-                                    <td className='btn m-2' onClick={()=>remove(PaymentInfo?.transaction)}>Remove</td>
+                                    <td className='btn m-2' onClick={() => remove(PaymentInfo?.transaction)}>Remove</td>
                                 </tr>
                             )
                         }

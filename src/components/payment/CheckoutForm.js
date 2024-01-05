@@ -9,16 +9,16 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase/firebase.init";
 
 
-const CheckoutForm=({clientSecret,price,transaction,setTransaction,success,setSuccess})=>{
-    
+const CheckoutForm = ({ clientSecret, price, transaction, setTransaction, success, setSuccess }) => {
+
     // const [transaction, setTransaction] = useState('')
     // const [success, setSuccess] = useState('')
     const stripe = useStripe();
     const elements = useElements();
     const [user] = useAuthState(auth)
     const currentDate = new Date();
-    
-    
+
+
 
 
     // const clientSecret = new URLSearchParams(window.location.search).get(
@@ -70,7 +70,7 @@ const CheckoutForm=({clientSecret,price,transaction,setTransaction,success,setSu
                     card: card,
                     billing_details: {
                         email: user?.email,
-                      
+
                     },
                 },
             },
@@ -85,11 +85,11 @@ const CheckoutForm=({clientSecret,price,transaction,setTransaction,success,setSu
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    price:price,
-                    email:user?.email,
-                    transaction:paymentIntent?.id,
-                    date:currentDate.toISOString()
-                   
+                    price: price,
+                    email: user?.email,
+                    transaction: paymentIntent?.id,
+                    date: currentDate.toISOString()
+
                 })
             })
                 .then(res => res.json())
@@ -127,9 +127,13 @@ const CheckoutForm=({clientSecret,price,transaction,setTransaction,success,setSu
                 </div>
 
 
-                <button type="submit" className="btn" disabled={!stripe || !elements}>
-                    confirm
-                </button>
+                {
+                  success?   <button type="submit" className="btn" disabled={success}>
+                        Paid
+                    </button>:<button type="submit" className="btn" disabled={!stripe || !elements}>
+                        Pay
+                    </button>
+                }
                 {errorMessage && <div>{cardError}</div>}
             </form>
             {
