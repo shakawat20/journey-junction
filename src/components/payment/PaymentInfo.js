@@ -56,9 +56,9 @@ const PaymentInfo = () => {
     }
     console.log("payment message",  payment.message)
     return (
-        <div>
+        <div style={{width:"100%"}}>
 
-            <div className="overflow-x-auto" style={{ height: "800px", width: "1200px" }}>
+            <div className="overflow-x-auto" style={{ height: "800px", width: "100%" }}>
                 <table className="table">
                     {/* head */}
                     <thead>

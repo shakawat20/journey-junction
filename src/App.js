@@ -38,17 +38,21 @@ function App() {
       <MyContext.Provider value={destination}>
         <Navbar></Navbar>
         <Routes>
+
+
+
           <Route path='/' element={<Home></Home>} />
           <Route path='/destination/:id' element={<Destination></Destination>} />
           <Route path='/about' element={<About></About>} />
           <Route path='/login' element={<Login></Login>} />
           <Route path='/registration' element={<Registration></Registration>} />
           {user?.email && <Route path='/dashboard' element={<Dashboard></Dashboard>}>
-            
+
             <Route path='/dashboard' element={<MyDestination></MyDestination>} />
             <Route path='/dashboard/paymentInfo' element={<PaymentInfo></PaymentInfo>} />
 
           </Route>}
+
 
         </Routes>
         <Footer></Footer>

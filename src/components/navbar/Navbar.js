@@ -80,7 +80,7 @@ const Navbar = () => {
 
 
       { user?.email && <li className='mr-4'>
-            <Link to='/dashboard'>My destination</Link>
+            <Link to='/dashboard'>My Destination</Link>
         </li>}
         <li className='mr-4'>
             <Link to='/about'>About</Link>
@@ -93,8 +93,8 @@ const Navbar = () => {
 
 
     return (
-       
-            <div className="navbar  bg-base-300 rounded "  style={{ position: 'sticky', top: 0, zIndex: 1000 }} >
+    //    <div>
+            <div className="navbar  bg-base-300 rounded "  style={{ position: 'sticky', top: 0, zIndex: 999,height:"50px"}} >
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -120,8 +120,6 @@ const Navbar = () => {
 
 
 
-
-
                 <div className="navbar-end flex align-center">
                     {
                         user && <div className="avatar mr-4">
@@ -141,7 +139,7 @@ const Navbar = () => {
 
             
 
-
+            // </div>
     );
 };
 

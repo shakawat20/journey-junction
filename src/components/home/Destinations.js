@@ -39,24 +39,27 @@ const Destinations = () => {
 
 
     return (
-        <div className='lg:flex lg:mt-8  lg:mb-8 md:grid-cols-1 sm:grid-cols-1'>
+        < div className='grid  lg:grid-cols-4 md:grid-cols-2 justify-center items-center' style={{width:"100%" }}>
             {
-                destination.map(data => 
-                <div className="card w-96 bg-base-100 shadow-xl ml-5 ">
-                    <figure><img src={data.img} alt="Shoes" style={{ width: '100',height: '350px', objectFit: 'cover' }} /></figure>
-                    <div className="card-body">
-                        <h2 className="card-title">{data.place}</h2>
-                        <p>{data.travelers}</p>
-                        <div className="card-actions justify-end">
-                            <button className="btn btn-primary" onClick={
-                                () => {
-                                    navigate(`/destination/${data.place}`)
-                                }
+                destination.map(data =>
+                    <div className='ml-2 mb-1'>
+                        <div className="card bg-base-100 shadow-xl " style={{ width:"100%"}}>
+                            <figure><img src={data.img} alt="Shoes" style={{ width: '100%', height: '350px', objectFit: 'cover' }} /></figure>
+                            <div className="card-body">
+                                <h2 className="card-title">{data.place}</h2>
+                                <p>{data.travelers}</p>
+                                <div className="card-actions justify-end">
+                                    <button className="btn btn-primary" onClick={
+                                        () => {
+                                            navigate(`/destination/${data.place}`)
+                                        }
 
-                            }>Booking</button>
+                                    }>Booking</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>)
+                )
             }
         </div>
     );

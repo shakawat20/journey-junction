@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import img from '../../img/youtube2.png'
+import './About.css'
 
 const About = () => {
     const aboutServices = [
@@ -63,12 +64,12 @@ const About = () => {
             </div>
             <div className='flex flex-col justify-between" items-center'>
                 <p className='font-bold text-3xl mt-5 text-center'>  Why you choose us?</p>
-                <div className='grid grid-cols-3 '>
+                <div id='journey' className='grid grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1'>
 
 
 
                     {aboutServices.map((service, index) => (
-                        <div className="card w-96 bg-base-100 shadow-xl m-6 border" key={index}>
+                        <div className="card w-96 bg-base-100 shadow-xl m-3 border" key={index}>
                             <figure></figure>
                             <div className="card-body">
                                 <h2 className="card-title">{service.title}</h2>
@@ -82,9 +83,9 @@ const About = () => {
 
 
 
-            <div className='flex mt-10'>
-                <iframe style={{ height: "500px", width: "800px" }} className='mt-3 h-96   rounded mb-3' width="560" height="315" src="https://www.youtube.com/embed/NcBjx_eyvxc?si=XEG0tEqd2Rgr1l9X" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                <div style={{ width: "800px", paddingLeft: "30px" }}>
+            <div id='about' className='flex mt-10 lg:flex-row md:flex-row sm:flex-col' >
+                <iframe style={{ height: "500px", width: "100%"}} className='mt-3 h-96   rounded mb-3' width="560" height="315" src="https://www.youtube.com/embed/NcBjx_eyvxc?si=XEG0tEqd2Rgr1l9X" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <div style={{ width: "100%", paddingLeft: "30px" }}>
                     <div className='font-bold text-3xl'>
                         About Us
                     </div>
