@@ -2,37 +2,78 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase/firebase.init';
 import Loading from '../loading/Loading';
+import UseAdmin from '../../hooks/UseAdmin';
 
 const PaymentInfo = () => {
     const [user] = useAuthState(auth)
+    const [admin] = UseAdmin(user)
     const [payment, setPayment] = useState([])
     const [removeDestination, setRemoveDestination] = useState()
 
 
-    useEffect(() => {
-        if (!user?.email) {
-            setPayment([])
-            return (<span className="loading loading-spinner loading-lg"></span>)
-        }
-        else if (user?.email) {
 
-            fetch(`https://journey-junction-server.vercel.app/paymentInfo/${user?.email}`,
-                {
-                    method: 'GET',
-                    headers: {
-                        authorization: `Bearer ${localStorage.getItem('journeyToken')}`
-                    }
+    // if (admin === false) {
+    //     const filteredPayments = payment.filter(p => p?.email === user?.email);
+    //     console.log("hope is everything")
+    //     setPayment(filteredPayments);
+    // }
+
+
+
+
+
+
+    useEffect(() => {
+
+        fetch(`https://journey-junction-server.vercel.app/userInfo`,
+            {
+                method: 'GET',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('journeyToken')}`
+                }
+            }
+
+        )
+            .then(res => res.json())
+            .then(data => {
+
+
+                if (admin === false) {
+                    const filteredPayments = data.filter(p => p?.email === user?.email);
+                    console.log("hope is everything")
+                    setPayment(filteredPayments);
+                }
+                else{
+                    setPayment(data)
                 }
 
-            )
-                .then(res => res.json())
-                .then(data => {
-                    setPayment(data)
-                    console.log("paymentInfo", data)
-                })
-        }
 
-    }, [user, removeDestination])
+            })
+
+        // else if (admin==false) {
+
+        //     fetch(`https://journey-junction-server.vercel.app/paymentInfo/${user?.email}`,
+        //         {
+        //             method: 'GET',
+        //             headers: {
+        //                 authorization: `Bearer ${localStorage.getItem('journeyToken')}`
+        //             }
+        //         }
+
+        //     )
+        //         .then(res => res.json())
+        //         .then(data => {
+        //             setPayment(data)
+        //             console.log("paymentInfo", data)
+        //         })
+        // }
+
+    }, [admin, removeDestination])
+
+
+
+
+
 
     const remove = (transactionId) => {
         fetch(`https://journey-junction-server.vercel.app/paymentInfo/${transactionId}`, {
@@ -48,15 +89,15 @@ const PaymentInfo = () => {
             })
 
     }
-    console.log(payment)
+
     if (payment.message) {
 
-       return(<div>Session expire</div>)
+        return (<div>Session expire</div>)
 
     }
-    console.log("payment message",  payment.message)
+
     return (
-        <div style={{width:"100%"}}>
+        <div style={{ width: "100%" }}>
 
             <div className="overflow-x-auto" style={{ height: "800px", width: "100%" }}>
                 <table className="table">

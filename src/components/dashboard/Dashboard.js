@@ -1,10 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { MyContext } from '../../App';
 import { Link, Outlet } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase/firebase.init';
+import UseAdmin from '../../hooks/UseAdmin';
 
 const Dashboard = () => {
 
+  const [user] = useAuthState(auth)
 
+  const [admin, adminLoading] = UseAdmin(user)
 
 
   return (
@@ -24,8 +29,14 @@ const Dashboard = () => {
           <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 bg-base-200 text-base-content  " style={{ height: "100%" }}>
             {/* Sidebar content here */}
-            <li><Link to="/dashboard">My Destination</Link></li>
-            <li><Link to="/dashboard/paymentInfo">Payment Info</Link></li>
+            {!admin && <><li><Link to="/dashboard">My Destination</Link></li>
+             <li><Link to="/dashboard/paymentInfo">Payment Info</Link></li></>}
+         
+            {
+              admin && <> <li><Link to="/dashboard">Make admin</Link></li>
+              <li><Link to="/dashboard/paymentInfo">Payment Info</Link></li></>
+            }
+
 
           </ul>
 

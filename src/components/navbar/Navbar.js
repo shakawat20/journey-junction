@@ -1,10 +1,11 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import auth from '../../firebase/firebase.init';
 import { signOut } from 'firebase/auth';
 
 const Navbar = () => {
+ const navigate=useNavigate()
 
     const [user, loading, error] = useAuthState(auth);
     if (user) {
@@ -131,7 +132,11 @@ const Navbar = () => {
 
 
                     {
-                        user ? <button onClick={() => signOut(auth)}>Log out</button> : <Link className="btn" to="/login">Log in</Link>
+                        user ? <button onClick={() => {
+                            signOut(auth)
+                           navigate("/")
+
+                        }}>Log out</button> : <Link className="btn" to="/login">Log in</Link>
                     }
 
                 </div>

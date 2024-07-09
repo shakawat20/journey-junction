@@ -23,7 +23,7 @@ const Registration = () => {
     console.log('Confirm Password:', confirmPassword);
     createUserWithEmailAndPassword(email, password)
     // const storedData = localStorage.getItem('user');
-    localStorage.setItem('user', user?.email);
+    // localStorage.setItem('user', user?.email);
 
 
   };

@@ -16,6 +16,8 @@ import MyDestination from './components/dashboard/myDestination/MyDestination'
 import PaymentInfo from './components/payment/PaymentInfo';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from './firebase/firebase.init';
+import UseAdmin from './hooks/UseAdmin';
+import MakeAdmin from './components/makeAdmin/MakeAdmin';
 
 
 
@@ -24,6 +26,8 @@ function App() {
 
   const [destination, setDestination] = useState([]);
   const [user] = useAuthState(auth)
+
+  const [admin, adminLoading] = UseAdmin(user)
 
   useEffect(() => {
     fetch('https://journey-junction-server.vercel.app/destination')
@@ -46,12 +50,19 @@ function App() {
           <Route path='/about' element={<About></About>} />
           <Route path='/login' element={<Login></Login>} />
           <Route path='/registration' element={<Registration></Registration>} />
-          {user?.email && <Route path='/dashboard' element={<Dashboard></Dashboard>}>
+          {!admin && <> <Route path='/dashboard' element={<Dashboard></Dashboard>}>
 
             <Route path='/dashboard' element={<MyDestination></MyDestination>} />
             <Route path='/dashboard/paymentInfo' element={<PaymentInfo></PaymentInfo>} />
 
-          </Route>}
+          </Route></>}
+
+          {admin && <> <Route path='/dashboard' element={<Dashboard></Dashboard>}>
+            <Route path='/dashboard/paymentInfo' element={<PaymentInfo></PaymentInfo>}></Route>
+            {/* <Route path='/dashboard/addService' element={<AddService setProject={setProject} ></AddService>}></Route> */}
+            <Route path='/dashboard' element={<MakeAdmin></MakeAdmin>}></Route>
+          </Route></>}
+
 
 
         </Routes>
