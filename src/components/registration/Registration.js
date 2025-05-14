@@ -30,7 +30,7 @@ const Registration = () => {
 
 
   if (cUser || user) {
-    navigate("/dashboard")
+    navigate("/")
   }
 
 

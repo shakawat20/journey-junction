@@ -36,10 +36,10 @@ const PaymentInfo = () => {
         )
             .then(res => res.json())
             .then(data => {
-
+console.log("problem",data)
 
                 if (admin === false) {
-                    const filteredPayments = data.filter(p => p?.email === user?.email);
+                    const filteredPayments = data?.filter(p => p?.email == user?.email);
                     console.log("hope is everything")
                     setPayment(filteredPayments);
                 }
@@ -106,8 +106,8 @@ const PaymentInfo = () => {
                         <tr>
                             <th>No</th>
                             <th>Date</th>
-                            <th>Transaction Id</th>
                             <th>Email</th>
+                            <th>Transaction Id</th>
                             <th>Price</th>
                         </tr>
                     </thead>

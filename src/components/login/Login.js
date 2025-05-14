@@ -80,7 +80,7 @@ const Login = () => {
           <h2 className="text-2xl font-semibold mb-4">Login</h2>
           <form onSubmit={handleLogin}>
             <div className="mb-4">
-              <label htmlFor="email" className="block text-gray-700">Email:</label>
+              <label htmlFor="email" className="block text-gray-700">Emaildd:</label>
               <input
                 type="email"
                 id="email"
@@ -130,7 +130,7 @@ const Login = () => {
               or
             </span>
             <Link to='/registration'>
-              <button type="submit" className="border rounded border-blue text-gray py-2 px-4">
+              <button type="submit" className="border  rounded border-blue text-gray py-2 px-4" style={{color:"black"}}>
                 create account
               </button>
             </Link>

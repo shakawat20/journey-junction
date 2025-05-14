@@ -22,7 +22,7 @@ const MyDestination = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to the top on component mount
   }, []);
-  
+
   useEffect(() => {
     if (price) {
       fetchPaymentIntent();
@@ -58,48 +58,54 @@ const MyDestination = () => {
 
   const x = JSON.parse(localStorage.getItem('user'))
 
-  for (let i = 0; i < x.length; i++) {
-    for (let j = 0; j < destination.length; j++) {
-      if (x[i] == null) {
-        continue
+ if(x!=null){
+
+ 
+
+    for (let i = 0; i < x.length; i++) {
+      for (let j = 0; j < destination.length; j++) {
+        if (x[i] == null) {
+          continue
+        }
+        if (x[i].id == destination[j]._id) {
+
+          places.push(
+            {
+              destination: destination[j].card[x[i].place.cardId],
+              id: x[i].place.cardId,
+              destinationId: destination[j]._id,
+              uniqueId: x[i].uniqueId
+            }
+          )
+
+
+        }
+
       }
-      if (x[i].id == destination[j]._id) {
-
-        places.push(
-          {
-            destination: destination[j].card[x[i].place.cardId],
-            id: x[i].place.cardId,
-            destinationId: destination[j]._id,
-            uniqueId: x[i].uniqueId
-          }
-        )
-
-
-      }
-
     }
+    
+ 
   }
 
-
   return (
-    <div style={{ height: "100%",width:"100%"}}>
+    <div style={{ height: "100%", width: "100%" }}>
       <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1'>
-      
+
         {places.map((place) => (
           <div>
-          <div className="card card-compact w-100 bg-base-100 shadow-xl m-3" key={place.uniqueId}>
-            <button style={{ color: "white", width: "30px", position: "relative", left: "92%", top: "28px" }} className='' onClick={() => removePlace(place.uniqueId)}>X</button>
-            <figure className="h-60 w-92">
-              <img src={place.destination.img} alt={place.title} className="h-full w-full object-cover" />
-            </figure>
-            <div className="card-body">
-              <p>{place.destination.title}</p>
-              <p>{place.destination.price} $</p>
-              <div className="card-actions justify-end">
-                <label htmlFor="my_modal_6" className="btn" onClick={() => setPrice(place.destination.price)}>Buy now</label>
+            <div className="card card-compact w-100 bg-base-100 shadow-xl m-3" key={place.uniqueId}>
+              <button style={{ color: "white", width: "30px", position: "relative", left: "92%", top: "28px" }} className='' onClick={() => removePlace(place.uniqueId)}>X</button>
+              <figure className="h-60 w-92">
+                <img src={place.destination.img} alt={place.title} className="h-full w-full object-cover" />
+              </figure>
+              <div className="card-body">
+                <p>{place.destination.title}</p>
+                <p>{place.destination.price} $</p>
+                <div className="card-actions justify-end">
+                  <label htmlFor="my_modal_6" className="btn" onClick={() => setPrice(place.destination.price)}>Buy now</label>
+                </div>
               </div>
             </div>
-          </div>
           </div>
         ))}
         <div style={{ zIndex: 2007 }}>
