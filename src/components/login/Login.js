@@ -80,7 +80,7 @@ const Login = () => {
           <h2 className="text-2xl font-semibold mb-4">Login</h2>
           <form onSubmit={handleLogin}>
             <div className="mb-4">
-              <label htmlFor="email" className="block text-gray-700">Emaildd:</label>
+              <label htmlFor="email" className="block text-gray-700">Email Id:</label>
               <input
                 type="email"
                 id="email"
@@ -111,8 +111,6 @@ const Login = () => {
                 Login
               </button>
             </div>
-
-
 
           </form>
 

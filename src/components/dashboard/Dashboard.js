@@ -33,8 +33,11 @@ const Dashboard = () => {
              <li><Link to="/dashboard/paymentInfo">Payment Info</Link></li></>}
          
             {
-              admin && <> <li><Link to="/dashboard">Make admin</Link></li>
-              <li><Link to="/dashboard/paymentInfo">Payment Info</Link></li></>
+              admin && <> 
+              <li><Link to="/dashboard">Make admin</Link></li>
+              <li><Link to="/dashboard/paymentInfo">Payment Info</Link></li>
+              <li><Link to="/dashboard/addPlace">Add Place</Link></li>
+              </>
             }
 
 

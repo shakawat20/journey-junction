@@ -28,7 +28,7 @@ const MakeAdmin = () => {
     };
 
     return (
-        <div class="flex  h-screen" style={{ border: "2px solid red" }}>
+        <div class="flex  h-screen" >
             <div class="text-center">
                 {/* <h1 class="text-xl font-bold">Make Admin</h1> */}
                 <form class="mt-4" onSubmit={handleSubmit(onSubmit)}>

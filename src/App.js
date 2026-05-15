@@ -18,6 +18,8 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from './firebase/firebase.init';
 import UseAdmin from './hooks/UseAdmin';
 import MakeAdmin from './components/makeAdmin/MakeAdmin';
+import AddProduct from './components/addProduct/AddPlace';
+import AddPlace from './components/addProduct/AddPlace';
 
 
 
@@ -61,6 +63,7 @@ function App() {
             <Route path='/dashboard/paymentInfo' element={<PaymentInfo></PaymentInfo>}></Route>
             {/* <Route path='/dashboard/addService' element={<AddService setProject={setProject} ></AddService>}></Route> */}
             <Route path='/dashboard' element={<MakeAdmin></MakeAdmin>}></Route>
+            <Route path='/dashboard/addPlace' element={<AddPlace></AddPlace>}></Route>
           </Route></>}
 
 
